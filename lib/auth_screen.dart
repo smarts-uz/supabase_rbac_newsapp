@@ -12,27 +12,27 @@ class AuthScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Sign In'),
       ),
-      body: ListView(
+      body: Padding(
         padding: const EdgeInsets.all(24.0),
-        children: [
-          SupaEmailAuth(
-            redirectTo: kIsWeb ? null : 'io.supabase.flutter://',
-            onSignInComplete: (response) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) {
+        child: SupaEmailAuth(
+          redirectTo: kIsWeb ? null : 'io.supabase.flutter://',
+          onSignInComplete: (response) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) {
+                return const HomeScreen();
+              },
+            ));
+          },
+          onSignUpComplete: (response) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) {
                   return const HomeScreen();
-                },)
-              );
-            },
-            onSignUpComplete: (response) {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
-                  },)
-              );
-            },
-          ),
-        ],
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

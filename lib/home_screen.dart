@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/auth_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,6 +19,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('News Feed'),
+        actions: [
+          IconButton(onPressed: (){
+            Supabase.instance.client.auth.signOut();
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) {
+                return const AuthScreen();
+              },)
+            );
+          }, icon: const Icon(Icons.logout_rounded),),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
